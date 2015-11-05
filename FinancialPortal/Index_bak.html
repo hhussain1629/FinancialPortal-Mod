@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width" />
+    <title>Financial Portal</title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/Site.css" rel="stylesheet" />
+    <link href="Content/ui-bootstrap-csp.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div ng-app="FinancialPortal">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a ui-sref="Templates/Users" class="navbar-brand">Financial Portal</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a ui-sref="login">Log in/Register</a></li>
+                        <!--<li></li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            <div ui-view></div>
+            <hr />
+            <footer>
+                <p>&copy; Hammad Hussain <!--Call script to stamp current year--></p>
+            </footer>
+        </div>
+    </div>
+
+    <script src="Scripts/jquery-2.1.4.min.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-resource.min.js"></script>
+    <script src="Scripts/angular-ui-router.min.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap.min.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+
+    <script src="NgApps/app.js"></script>
+    <script src="NgApps/config.js"></script>
+
+    <!--<script src="NgApps/FinancialPortalController.js"></script>-->
+    <!--<script src="NgApps/UserController.js"></script>-->
+</body>
+</html>
+

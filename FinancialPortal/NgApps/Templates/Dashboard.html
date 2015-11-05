@@ -1,0 +1,409 @@
+﻿<div ng-controller="DashboardController">
+    <div class="waitMessage">
+        <h1>Please wait while Budget Master retrieves your data...</h1>
+    </div>
+    <div class="templateDisplay">
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Dashboard <small>Statistics Overview for the "{{household}}" Household</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <i class="fa fa-dashboard"></i> Dashboard
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <!-- /.row -->
+
+
+        
+        <div id="barGraphFrame" ng-if="maxValue > 0">
+            <h3 class="graphTitle">Budget vs. Spending for {{monthname}} {{year}}</h3>
+            <br />
+            <br />
+            <div class="row">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-1">
+                    <br /><br /><br /><br />
+                    <b>BUDGET:</b>
+                    <br />
+                    <span><b>{{monthlyincome | currency: "$"}}</b></span>
+                </div>
+                <!--<div class="col-md-1">
+            </div>-->
+                <div class="bargraph col-md-2">
+                    <!-- style="width: 100%; "365px-->
+                    <ul class="bars">
+
+                        <li class="bar1 greenbar" style="height: {{(monthlyincome * maxBarHeight)/maxValue}}px;"></li>
+                        <li class="bar2 redbar" style="height: {{(monthlyexpenses * maxBarHeight)/maxValue}}px;"></li>
+                        <!--<li class="bar3 bluebar" style="height: 70px;">35</li>
+                    <li class="bar4 greenbar" style="height: 14px;"><span>7</span></li>
+                    <li class="bar5 orangebar" style="height: 160px;">80</li>-->
+                    </ul>
+
+                    <!--<ul class="label"><li style="float:left;">Budget</li><li>Spending</li><li></li><li></li><li></li></ul>-->
+                    <!--<ul class="y-axis"><li>100</li><li>75</li><li>50</li><li>25</li><li></li></ul>-->
+                    <!--<p class="centered">Yearly US Fruit Consumption in Tons</p>-->
+                </div>
+                <div class="col-md-1">
+                    <br /><br /><br /><br />
+                    <b>SPENDING:</b>
+                    <br />
+                    <b>{{monthlyexpenses | currency: "$"}}</b>
+                </div>
+               
+            </div>
+        </div>
+        <!--<div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-1">
+                Budget
+            </div>
+            <div class="col-md-1">
+                Spending
+            </div>
+        </div>-->
+        <!--<div id="graphDiv1">
+        </div>-->
+        <br />
+        <!--[if IE]><script src="../../js/excanvas.js"></script></script><![endif]-->
+        <!--<script src="../../js/html5-canvas-bar-graph.js"></script>-->
+        <!--<script>
+            (function () {
+
+                function createCanvas(divName) {
+
+                    var div = document.getElementById(divName);
+                    var canvas = document.createElement('canvas');
+                    div.appendChild(canvas);
+                    if (typeof G_vmlCanvasManager != 'undefined') {
+                        canvas = G_vmlCanvasManager.initElement(canvas);
+                    }
+                    var ctx = canvas.getContext("2d");
+                    return ctx;
+                }
+
+                var ctx = createCanvas("graphDiv1");
+
+                var graph = new BarGraph(ctx);
+                graph.maxValue = ($scope.monthlyexpenses > $scope.monthlyincome) ? $scope.monthlyexpenses : $scope.monthlyincome;
+                graph.margin = 2;
+                graph.colors = ["#00ff00", "#ff0000"];
+                graph.xAxisLabelArr = ["Budget", "Spending"];
+
+                setInterval(function () {
+                    graph.update([$scope.incomelabel, $scope.expenselabel]);
+                }, 1000);
+
+            }());
+        </script>-->
+
+        <br />
+        <h2 class="sectionHeading">Latest Transactions for the "{{household}}" Household</h2>
+        <br />
+        <table tr-ng-grid="" items="latesttrans" order-by-reverse="DisplayDate" page-items="7" id="dashTransTable">
+            <thead>
+                <tr>
+                    <th field-name="Date" class="dashTransDate"></th>
+                    <!--<th field-name="DisplayDate" display-name="Date"></th>
+                    <th field-name="DisplayTime" display-name="Time" enable-filtering="false"></th>-->
+                    <th field-name="FinAccount.Name" display-name="Account" enable-filtering="false"></th>
+                    <th field-name="Category.Name" display-name="Category" enable-filtering="false"></th>
+                    <th field-name="Description" enable-filtering="false"></th>
+                    <th field-name="ReconciledAmount" display-name="Amount, Reconciled ($)" class = "dashTransAmount" enable-filtering="false"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td field-name="Date">
+                        <div>
+                            {{gridDisplayItem.Date | date: "MMM. d, yyyy h:mma"}}
+                        </div>
+                    </td>
+                    <td field-name="ReconciledAmount">
+                        <div>
+                            {{gridDisplayItem.ReconciledAmount | currency: ""}}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <br />
+        <h2 class="sectionHeading">Account Balances for the "{{household}}" Household</h2>
+        <br />
+        <table tr-ng-grid="" items="finAccounts" page-items="4" id="dashAcctTable">
+            <thead>
+                <tr>
+                    <th field-name="Name" enable-filtering="false"></th>
+                    <th field-name="ReconciledBalance" display-name="Balance, Reconciled ($)" class="dashAcctBalance" enable-filtering="false"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td field-name="ReconciledBalance">
+                        <div>
+                            {{gridDisplayItem.ReconciledBalance | currency: ""}}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!--<div class="row">
+            <div class="col-lg-12">
+                <div class="alert alert-info alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <i class="fa fa-info-circle"></i>  <strong>Like SB Admin?</strong> Try out <a href="http://startbootstrap.com/template-overviews/sb-admin-2" class="alert-link">SB Admin 2</a> for additional features!
+                </div>
+            </div>
+        </div>-->
+        <!-- /.row -->
+        <!--<div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-comments fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">26</div>
+                                <div>New Comments!</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-tasks fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">12</div>
+                                <div>New Tasks!</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-yellow">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-shopping-cart fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">124</div>
+                                <div>New Orders!</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-red">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <i class="fa fa-support fa-5x"></i>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">13</div>
+                                <div>Support Tickets!</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <div class="panel-footer">
+                            <span class="pull-left">View Details</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>-->
+        <!-- /.row -->
+        <!--<div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Area Chart</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="morris-area-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <!-- /.row -->
+        <!--<div class="row">
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i> Donut Chart</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="morris-donut-chart"></div>
+                        <div class="text-right">
+                            <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Tasks Panel</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item">
+                                <span class="badge">just now</span>
+                                <i class="fa fa-fw fa-calendar"></i> Calendar updated
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">4 minutes ago</span>
+                                <i class="fa fa-fw fa-comment"></i> Commented on a post
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">23 minutes ago</span>
+                                <i class="fa fa-fw fa-truck"></i> Order 392 shipped
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">46 minutes ago</span>
+                                <i class="fa fa-fw fa-money"></i> Invoice 653 has been paid
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">1 hour ago</span>
+                                <i class="fa fa-fw fa-user"></i> A new user has been added
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">2 hours ago</span>
+                                <i class="fa fa-fw fa-check"></i> Completed task: "pick up dry cleaning"
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">yesterday</span>
+                                <i class="fa fa-fw fa-globe"></i> Saved the world
+                            </a>
+                            <a href="#" class="list-group-item">
+                                <span class="badge">two days ago</span>
+                                <i class="fa fa-fw fa-check"></i> Completed task: "fix error on sales page"
+                            </a>
+                        </div>
+                        <div class="text-right">
+                            <a href="#">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Transactions Panel</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Order #</th>
+                                        <th>Order Date</th>
+                                        <th>Order Time</th>
+                                        <th>Amount (USD)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>3326</td>
+                                        <td>10/21/2013</td>
+                                        <td>3:29 PM</td>
+                                        <td>$321.33</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3325</td>
+                                        <td>10/21/2013</td>
+                                        <td>3:20 PM</td>
+                                        <td>$234.34</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3324</td>
+                                        <td>10/21/2013</td>
+                                        <td>3:03 PM</td>
+                                        <td>$724.17</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3323</td>
+                                        <td>10/21/2013</td>
+                                        <td>3:00 PM</td>
+                                        <td>$23.71</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3322</td>
+                                        <td>10/21/2013</td>
+                                        <td>2:49 PM</td>
+                                        <td>$8345.23</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3321</td>
+                                        <td>10/21/2013</td>
+                                        <td>2:23 PM</td>
+                                        <td>$245.12</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3320</td>
+                                        <td>10/21/2013</td>
+                                        <td>2:15 PM</td>
+                                        <td>$5663.54</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3319</td>
+                                        <td>10/21/2013</td>
+                                        <td>2:13 PM</td>
+                                        <td>$943.45</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-right">
+                            <a href="#">View All Transactions <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <!-- /.row -->
+    </div>
+</div>

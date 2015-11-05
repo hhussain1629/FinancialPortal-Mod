@@ -1,0 +1,90 @@
+﻿<div> <!--class="wrapper">-->
+    <h1>Accounts</h1>
+    <div class="container">
+        <div ng-controller="FinAccountController">
+            <div class="row">
+                <div class="col-md-9">
+                </div>
+                <div class="col-md-3">
+                    <button ng-click="dispAddForm()" id="addButton">Add Account</button>
+                </div>
+            </div>
+            <br />
+            <div id="addFinAcctForm">
+                <h2>Add an Account for the {{household}} Household</h2>
+                <form>
+                    &nbsp;&nbsp;Account Name:
+                    <br />
+                    &nbsp;&nbsp;<input ng-model="newName" type="text" value="{{newName}}" />
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;Account Balance:
+                    <br />
+                    $<input ng-model="quantity" type="number" name="{{quantity}}" />
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;<input type="button" value="Submit" ng-click="addFinAccount()" />
+                    <input type="button" value="Cancel" ng-click="getFinAccounts()" />
+                </form>
+            </div>
+
+            <div id="editFinAcctForm">
+                <h2>Edit Account</h2>
+                <form>
+                    &nbsp;&nbsp;Account Name:
+                    <br />
+                    &nbsp;&nbsp;<input type="text" ng-model="newName"/>
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;Account Balance:
+                    <br />
+                    $<input type="number" value="{{Balance | number: 2}}" ng-model="newBalance"/>
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;Reconciled Account Balance:
+                    <br />
+                    $<input type="number" value="{{ReconciledBalance | number: 2}}" ng-model="newRecBalance" />
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;<input type="button" value="Submit" ng-click="editFinAccount()" />
+                    <input type="button" value="Cancel" ng-click="getFinAccounts()" />
+                </form>
+            </div>
+
+            <div id="acctTable">
+                <h2 class="sectionHeading">Accounts for the "{{household}}" Household</h2>
+                <br />
+                <table tr-ng-grid="" items="finAccounts" selected-items="selectedAccount" selection-mode="SingleRow"  id = "acctsTable" page-items="4">
+                    <thead>
+                        <tr>
+                            <th field-name="Name"></th>
+                            <th field-name="Balance" display-name="Balance ($)" class= "acctsBalance" enable-filtering="false"></th>
+                            <th field-name="ReconciledBalance" display-name="Reconciled Balance ($)" class="acctsRecBalance" enable-filtering="false"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td field-name="Balance">
+                                <div>
+                                    {{gridDisplayItem.Balance | currency: ""}}
+                                </div>
+                            </td>
+                            <td field-name="ReconciledBalance">
+                                <div>
+                                    {{gridDisplayItem.ReconciledBalance | currency: ""}}
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <br />
+            <button ng-click="dispEditForm()" id="editButton">Edit Account</button>
+        </div>
+    </div>
+</div>
+
+
+
+<!--<input ng-model="{{Id}}" type="button" value="{{Name}}" ng-click="dispEditForm()" />-->

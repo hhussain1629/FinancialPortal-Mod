@@ -1,0 +1,174 @@
+﻿<div class="wrapper">
+    <div class="container">
+        <div ng-controller="BudgetItemController">
+            <br /><br />
+            <div class="row">
+                <div class="col-md-7">
+                </div>
+                <div class="col-md-4" id="topButtons">
+                    <button ng-click="dispEditCatsForm()">Edit Budget Categories</button> <button ng-click="dispAddBIForm()">Create Budget Item</button>
+                </div>
+            </div>
+            <br />
+            <div id="editCatsForm">
+                <h2>Edit Budget Categories</h2>
+                <form>
+                    <input type="radio" name="EditCatChoice" id="CNC" value="Create" ng-click="dispCreateCat()"> Create a New Budget Category<br />
+                    <input type="radio" name="EditCatChoice" id="EC" value="Edit" ng-click="dispModCat()"> Edit a Budget Category<br />
+                    <input type="radio" name="EditCatChoice" id="DC" value="Delete" ng-click="dispDelCat()"> Delete a Budget Category<br />
+                    <br />
+                    <input type="button" value="Cancel" ng-click="getBudgetItems()" />
+                </form>
+            </div>
+
+            <div id="createCatForm">
+                <h2>Create a Budget Category for the {{household}} Household</h2>
+                <form>
+                    Category Name:
+                    <br />
+                    <input ng-model="catName" type="text" value="catName" />
+                    <br />
+                    <br />
+                    Category Type:
+                    <br />
+                    <input ng-model="catType" type="radio" name="CatType" value="false">Income<br />
+                    <input ng-model="catType" type="radio" name="EditType" value="true" />Expenses<br />
+                    <br />
+                    <input type="button" value="Submit" ng-click="addCategory()" />
+                    <input type="button" value="Cancel" ng-click="getBudgetItems()" />
+                </form>
+            </div>
+
+            <div id="modCatForm">
+                <h2>Edit a Budget Category</h2>
+                <form>
+                    Select Budget Category to Edit: <br />
+                    <select required ng-model="selectedCategory" ng-options="category.Name for category in categories track by category.Id" class=" = " form-control></select>
+                    <br />
+                    <br />
+                    Edit Budget Category:
+                    <br />
+                    <input type="text" ng-model="selectedCategory.Name" value="{{selectedCategory.Name}}" />
+                    <br />
+                    <input type="button" value="Submit" ng-click="editCategory()" />
+                    <input type="button" value="Cancel" ng-click="getBudgetItems()" />
+                </form>
+            </div>
+
+            <div id="delCatForm">
+                <h2>Delete a Budget Category</h2>
+                Select Budget Category to Delete: <br />
+                <select required ng-model="selectedCategory" ng-options="category.Name for category in categories track by category.Id" class=" = " form-control></select>
+                <br />
+                <br />
+                <input type="button" value="Submit" ng-click="deleteCategory()" /> <input type="button" value="Cancel" ng-click="getBudgetItems()" />
+            </div>
+
+            <div id="addBIForm">
+                <h2>Create a Budget Item</h2>
+                <form>
+                    &nbsp;&nbsp;Select Budget Category:
+                    <br />
+                    &nbsp;&nbsp;(Required)
+                    <br />
+                    &nbsp;&nbsp;<select required ng-model="selectedCategory" ng-options="category.Name for category in categories track by category.Id" class=" = " form-control></select>
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;Unit Amount:
+                    <br />
+                    &nbsp;&nbsp;(Please enter a positive number.)
+                    <br />
+                    $<input ng-model="amount" type="number" min="0" />
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;Annual Frequency:
+                    <br />
+                    &nbsp;&nbsp;(Please enter a positive number.)
+                    <br />
+                    &nbsp;&nbsp;<input ng-model="annualFreq" type="number" value="1" min="1" />
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;Annual Amount:
+                    <br />
+                    <span ng-if="amount >= 0 && annualFreq >= 0">
+                        {{amount * annualFreq | currency: "$"}}
+                    </span>
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;<input type="button" value="Submit" ng-click="addBudgetItem()" /> <input type="button" value="Cancel" ng-click="getBudgetItems()" />
+                </form>
+            </div>
+
+
+
+            <div id="budgetTables">
+                <h1>Budget for the "{{household}}" Household</h1>
+                <br />
+                <br />
+                <h2 class="sectionHeading">Income</h2>
+                <br />
+                <table tr-ng-grid="" items="incomeitems" selected-items="selectedBI" selection-mode="SingleRow" class="budgetTable" page-items="3">
+                    <thead>
+                        <tr>
+                            <th field-name="Category.Name" display-name="Category"></th>
+                            <th field-name="Amount" display-name="Unit Amount ($)" enable-filtering="false"></th>
+                            <th field-name="AnnualFreq" display-name="Annual Frequency" enable-filtering="false"></th>
+                            <th field-name="AnnualAmount" display-name="Annual Amount ($)" display-format="annualAmount:gridItem" enable-filtering="false"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td field-name="Amount">
+                                <div>
+                                    {{gridDisplayItem.Amount | currency: ""}}
+                                </div>
+                            </td>
+                            <td field-name="AnnualAmount">
+                                <div>
+                                    {{gridDisplayItem.AnnualAmount | currency: ""}}
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
+                <br />
+                <h2 class="sectionHeading">Expenses</h2>
+                <br />
+                <table tr-ng-grid="" items="expenseitems" selected-items="selectedBI" selection-mode="SingleRow" class="budgetTable" page-items="3">
+                    <thead>
+                        <tr>
+                            <th field-name="Category.Name" display-name="Category"></th>
+                            <th field-name="Amount" display-name="Unit Amount ($)" enable-filtering="false"></th>
+                            <th field-name="AnnualFreq" display-name="Annual Frequency" enable-filtering="false"></th>
+                            <th field-name="AnnualAmount" display-name="Annual Amount ($)" display-format="annualAmount:gridItem" enable-filtering="false"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td field-name="Amount">
+                                <div>
+                                    {{gridDisplayItem.Amount | currency: ""}}
+                                </div>
+                            </td>
+                            <td field-name="AnnualAmount">
+                                <div>
+                                    {{gridDisplayItem.AnnualAmount | currency: ""}}
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
+                <div id="bottomButtons">
+                    <!--<button ng-click="dispEditBIForm()">Edit Budget Item</button>--> <button ng-click="deleteBudgetItem()">Delete Budget Item</button>
+                </div>
+                <br />
+                <br />
+                <h4>Total Income: {{income|currency: "$"}} <br /></h4>
+                <h4>Total Expenses: {{expenses|currency: "$"}} <br /></h4>
+                <h4>Difference: {{difference|currency: "$"}}</h4>
+            </div>
+        </div>
+    </div>
+</div>

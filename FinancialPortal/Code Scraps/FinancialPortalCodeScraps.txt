@@ -1,0 +1,20 @@
+        ProjectTools PT = new ProjectTools();
+
+        private TransView convToTransView(Transaction trans)
+        {
+            var viewTrans = new TransView();
+            if (trans != null)
+            {
+                viewTrans.Date = trans.Date;
+                viewTrans.FinAccountName = db.FinAccounts.FirstOrDefault(f => f.Id == trans.FinAccountId).Name ?? "";
+                viewTrans.CategoryName = db.Categories.FirstOrDefault(c => c.Id == trans.CategoryId).Name ?? "";
+                viewTrans.Description = trans.Description ?? "";
+                viewTrans.Amount = trans.Amount;
+                viewTrans.AbsAmount = trans.AbsAmount;
+                viewTrans.ReconciledAmount = trans.ReconciledAmount;
+                viewTrans.AbsReconciledAmount = trans.AbsReconciledAmount;
+                viewTrans.Updated = trans.Updated;
+                viewTrans.UpdatedByUser = db.Users.FirstOrDefault(u => u.Id == trans.UpdatedByUserId).FirstName ?? "";
+            }
+            return viewTrans;
+        }

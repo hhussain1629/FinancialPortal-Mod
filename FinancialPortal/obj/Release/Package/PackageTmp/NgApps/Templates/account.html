@@ -1,0 +1,47 @@
+﻿
+
+<section class="container animated fadeInUp">
+
+    <div class="row">
+        <div class="col-md-6 credBox">
+            <div id="login-wrapper">
+                <div class="panel panel-primary">
+                    <div class="panel-heading" style="background-color: darkgreen;">
+                        <h3 class="panel-title">
+                            Change Password
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            Name: {{authentication.firstName}} {{authentication.lastName}}
+                            <br />
+                            <br />
+                            E-mail Address: {{authentication.email}}
+                            <br />
+                            <br />
+                        </div>
+                        <form role="form" ng-submit="account.updatePassword()">
+                            <div class="form-group">
+                                <label for="inputPassword1">Old Password</label>
+                                <input type="password" ng-model="account.model.OldPassword"  class="form-control" placeholder="Old password" id="inputPassword1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword1">New Password</label>
+                                <input type="password" ng-model="account.model.NewPassword" class="form-control" placeholder="New password" id="inputPassword1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword2">Retype New Password</label>
+                                <input type="password" ng-model="account.model.ConfirmPassword" class="form-control" id="inputPassword2" placeholder="Retype new password" required>
+                                <span style="color:red;" ng-if="account.model.NewPassword != account.model.ConfirmPassword">The passwords do not match!</span>
+                            </div>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="account.model.NewPassword != account.model.ConfirmPassword" style="background-color: darkgreen;">Submit</button>
+                        </form>
+                        <br />
+                        <p><a ui-sref="dashboard"><strong><b>Cancel</b></strong></a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

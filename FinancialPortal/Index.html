@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Budget Master</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <!-- Bootstrap Core CSS -->
+    <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <!--<link href="css/sb-admin.css" rel="stylesheet">-->
+    <link href="../../css/sb-admin.css" rel="stylesheet" />
+    <!-- Morris Charts CSS -->
+    <!--<link href="css/plugins/morris.css" rel="stylesheet">-->
+    <link href="../../css/plugins/morris.css" rel="stylesheet" />
+    <!-- Custom Fonts -->
+    <link href="fonts/font-awesome.min.css" rel="stylesheet" />
+
+
+    <link href="Content/animate.css" rel="stylesheet" />
+    <link href="css/trNgGrid.min.css" rel="stylesheet" />
+
+    <!--Style Override-->
+    <link href="styles/verticalbargraph.css" rel="stylesheet" />
+    <link href="styles/StyleOverride.css" rel="stylesheet" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div ng-app="FinancialPortal">
+        <div id="wrapper" ng-controller="menuCtrl">
+            <!-- Navigation -->
+            <div class="container">
+                <nav class="navbar navbar-inverse navbar-fixed-top">
+
+                    <!--<h3 class="appTitle navbar-brand"><i>Budget Master</i></h3>-->
+
+
+
+                    <div class="container">
+                        <div class="navbar-collapse navbar-right collapse">
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li dropdown ng-if="authentication.isAuth" class="dropdown profile">
+                                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                                        <span class="meta">
+                                            <span class="appTitle"><i>Budget Master</i>&nbsp; &nbsp;</span>
+                                            <span class="avatar" ng-if="authentication.username === 'hhussain1629@gmail.com'">
+                                                <span class="avatar">
+                                                    <img src="Images/avatar1_me.png" class="img-circle" width="30" height="30">
+                                                </span>
+                                            </span>
+                                            <span class="avatar" ng-if="authentication.username !== 'hhussain1629@gmail.com'">
+                                                <span class="avatar">
+                                                    <img src="Images/avatar0.png" class="img-circle" width="30" height="30">
+                                                </span>
+                                            </span>
+                                            <span class="dropdown-toggle text" dropdown-toggle>{{authentication.firstName}} {{authentication.lastName}}</span>
+                                            <span class="caret"></span>
+                                        </span>
+                                    </a>
+                                    <ul class="dropdown-menu animated flipInX" role="menu">
+                                        <!--<li>
+                                                    <a href="">
+                                                        <span class="icon">
+                                                            <i class="fa fa-user"></i>
+                                                        </span>My Account
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <span class="icon">
+                                                            <i class="fa fa-envelope"></i>
+                                                        </span>Messages
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <span class="icon">
+                                                            <i class="fa fa-cog"></i>
+                                                        </span>Settings
+                                                    </a>
+                                        </li>-->
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a ui-sref="account">
+                                                <span class="icon">
+                                                    <i class="fa fa-sign-out"></i>
+                                                </span>Change Password
+                                            </a>
+                                            <a ui-sref="login" ng-click="logout()">
+                                                <span class="icon">
+                                                    <i class="fa fa-sign-out"></i>
+                                                </span>Log Out
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li dropdown ng-if="!authentication.isAuth" class="dropdown profile">
+                                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                                        <span class="meta">
+                                            <span class="icon">
+                                                <!--<img src="Images/avatar0.png" class="img-circle" width="30" height="30">-->
+                                                <i class="fa fa-bookmark"></i>
+                                            </span>
+                                            <span class="text">Login/Register</span>
+                                            <span class="caret"></span>
+                                        </span>
+                                    </a>
+                                    <ul class="dropdown-menu animated flipInX" role="menu">
+                                        <!--<li class="divider"></li>
+                                        <li>
+                                            <a ui-sref="home">Home</a>
+                                        </li>
+                                        <li class="divider"></li>-->
+                                        <li>
+                                            <a ui-sref="login">
+                                                <span class="icon">
+                                                    <i class="fa fa-sign-in"></i>
+                                                </span>Login
+                                            </a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a ui-sref="register">
+                                                <span class="icon">
+                                                    <i class="fa fa-pencil-square-o"></i>
+                                                </span>Register
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--<div class="navbar-header"> </div>-->
+                        <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>-->
+
+
+                    </div>
+                    <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens-->
+                    <div ng-if="authentication.isAuth" class="collapse navbar-collapse navbar-ex1-collapse" id="leftMenu">
+                        <ul class="nav navbar-nav side-nav">
+                            <!--<li>
+                                <a ui-sref="login"><i class="fa fa-fw fa-table"></i>Log in</a>
+                            </li>-->
+                            <!--<li class="appTitle">
+
+                            </li>-->
+                            <li>
+                                <a ui-sref="dashboard"><i class="fa fa-fw fa-dashboard"></i>Dashboard</a>
+                            </li>
+                            <li>
+                                <a ui-sref="household"><i class="fa fa-fw fa-table"></i>Household</a>
+                            </li>
+                            <li>
+                                <a ui-sref="finaccounts"><i class="fa fa-fw fa-table"></i>Accounts</a>
+                            </li>
+                            <li>
+                                <a ui-sref="budget"><i class="fa fa-fw fa-table"></i>Budget</a>
+                            </li>
+                            <li>
+                                <a ui-sref="transactions"><i class="fa fa-fw fa-table"></i>Transactions</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse
+                    </nav>-->
+
+                </nav>
+                <!--<div ng-if="!authentication.isAuth" ui-view></div>-->
+            </div>
+
+
+
+            <div id="page-wrapper">
+                <div class="container-fluid">
+                    <div ui-view class="stateView"></div>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /#page-wrapper -->
+        </div>
+    </div>
+
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <!--<script src="js/jquery.js"></script>-->
+    <script src="../../js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <!--<script src="js/bootstrap.min.js"></script>-->
+    <script src="../../js/bootstrap.min.js"></script>
+    <!-- Morris Charts JavaScript -->
+    <!--<script src="js/plugins/morris/raphael.min.js"></script>-->
+    <!--<script src="../../js/plugins/morris/raphael.min.js"></script>-->
+    <!--<script src="js/plugins/morris/morris.min.js"></script>-->
+    <!--<script src="../../js/plugins/morris/morris.min.js"></script>-->
+    <!--<script src="js/plugins/morris/morris-data.js"></script>-->
+    <!--<script src="../../js/plugins/morris/morris-data.js"></script>-->
+    <!--<script src="Scripts/jquery-2.1.4.min.js"></script>
+    <script src="Scripts/bootstrap.js"></script>-->
+
+    <script src="Scripts/angular.min.js"></script>
+    <!--<script src="Scripts/angular-route.min.js"></script>-->
+    <script src="Scripts/angular-resource.min.js"></script>
+    <script src="Scripts/angular-ui-router.min.js"></script>
+    <script src="Scripts/angular-local-storage.min.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap.min.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="js/trNgGrid.min.js"></script>
+
+    <script src="NgApps/app.js"></script>
+    <script src="NgApps/Services/authSvc.js"></script>
+    <script src="NgApps/Services/authIntercepterSvc.js"></script>
+    <script src="NgApps/Services/FPortalFactory.js"></script>
+
+    <script src="NgApps/Controllers/EntryController.js"></script>
+    <script src="NgApps/Controllers/menuCtrl.js"></script>
+    <script src="NgApps/Controllers/registerCtrl.js"></script>
+    <script src="NgApps/Controllers/loginCtrl.js"></script>
+    <script src="NgApps/Controllers/accountCtrl.js"></script>
+    <script src="NgApps/Controllers/homeCtrl.js"></script>
+    <script src="NgApps/Controllers/TransactionController.js"></script>
+    <script src="NgApps/Controllers/FinAccountController.js"></script>
+    <script src="NgApps/Controllers/BudgetItemController.js"></script>
+    <script src="NgApps/Controllers/HouseholdController.js"></script>
+    <script src="NgApps/Controllers/DashboardController.js"></script>
+
+    <!--<script src="js/html5-canvas-bar-graph.js"></script>-->
+
+</body>
+</html>

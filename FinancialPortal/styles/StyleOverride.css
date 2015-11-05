@@ -1,0 +1,151 @@
+﻿
+body {
+    background-color: lightgreen;
+}
+
+#page-wrapper {
+    background-color: lightgreen;
+}
+
+.stateView {
+    /*border-style: solid;
+    border-width: 10px;
+    border-color: darkgreen;*/
+    /*background-color: lightgreen;*/
+}
+
+.entryHeading {
+    margin-left: 30%;
+}
+
+table {
+    background-color: lightgrey;
+    
+    
+}
+
+
+/*.table {
+    border-color: black;
+    border-bottom-color: black;
+}*/
+
+/*.tr-ng-cell {
+    border-color: black;
+}
+
+.cellCssClass {
+     border-color: black;
+}*/
+.sectionHeading {
+    text-align:center;
+}
+
+#dashTransTable {
+    width: 75%;
+    margin: auto;
+}
+
+.dashTransDate {
+    width: 22%;
+}
+
+.dashTransAmount {
+    width: 15%;
+}
+
+#dashAcctTable {
+    width: 45%;
+    margin: auto;
+}
+
+#householdTable {
+    width: 65%;
+    margin: auto; 
+}
+
+#inviteButton {
+    margin-left: 20%;
+}
+.dashAcctBalance {
+    width: 45%; 
+}
+
+#acctsTable {
+    width: 60%;
+    margin: auto;
+}
+
+.acctsBalance {
+    width: 25%;
+}
+
+.acctsRecBalance {
+    width: 25%;
+}
+
+.budgetTable {
+    width:70%;
+    margin:auto;
+}
+
+.transactionTable {
+    width: 80%;
+    margin: auto;
+}
+.reconciledAmount {
+    /*width: 8%;*/
+}
+
+.transDate {
+    width: 20%;
+}
+
+.transUpdated {
+    width: 20%;
+}
+
+.transDesc {
+    width: 20%;
+}
+
+.credBox {
+    margin: 12%;
+}
+
+
+.navbar-collapse {
+    /*margin-right: 0px;*/
+}
+
+.appTitle {
+    color: green;
+    /*margin-right:40%;*/
+    font-size:larger;
+}
+
+.navbar-brand {
+    color: green;
+    vertical-align: top;
+}
+
+#barGraphFrame {
+    border-style: solid;
+    border-width: 10px;
+    border-color: darkgreen;
+    background-color: yellow;
+}
+
+.graphTitle {
+    margin-left:30%;
+}
+
+
+
+
+
+/*.templateDisplay {
+    background-color: yellow;
+}*/
+
+

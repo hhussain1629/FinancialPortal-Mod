@@ -1,0 +1,150 @@
+﻿<div class="wrapper">
+    <h1>Transactions</h1>
+    <br />
+    <div class="container">
+        <div ng-controller="TransactionController">
+            <div class="row">
+                <div class="col-md-9">
+                </div>
+                <div class="col-md-3">
+                    <button ng-click="dispAddForm()" id="addButton">Add Transaction</button>
+                </div>
+            </div>
+            <br />
+            
+            <div id="addTransForm">
+                <h2>Add a Transaction</h2>
+                <br />
+                <form>
+                    &nbsp;&nbsp;Select Account:
+                    <br />
+                    &nbsp;&nbsp;<select required ng-model="selectedFinAccount" ng-options="account.Name for account in finAccounts" ng-change="getCategories()" class=" = " form-control></select>
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;Select Category:
+                    <br />
+                    &nbsp;&nbsp;<select required ng-model="selectedCategory" ng-options="category.Name for category in categories" class=" = " form-control></select>
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;Description:
+                    <br />
+                    &nbsp;&nbsp;<input ng-model="description" type="text" />
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;Amount:
+                    <br />
+                    &nbsp;&nbsp;(Please enter a negative amount for a debit.)
+                    <br />
+                    $<input ng-model="amount" type="number" />
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;<input type="button" value="Submit" ng-click="addTransaction()" />
+                    <input type="button" value="Cancel" ng-click="getTransactions()" />
+                </form>
+            </div>
+
+            <div id="editTransForm">
+                <h2>Edit Transaction</h2>
+                <form>
+                    &nbsp;&nbsp;Date Created:
+                    <br />
+                    &nbsp;&nbsp;{{date | date: "MMM. d, yyyy, h:mma"}}
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;Account:
+                    <br />
+                    &nbsp;&nbsp;{{selectedTransaction[0].FinAccount.Name}}
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;Date Last Updated:
+                    <br />
+                    &nbsp;&nbsp;{{updated | date: "MMM. d, yyyy, h:mma"}}
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;Updated By:
+                    <br />
+                    &nbsp;&nbsp;{{selectedTransaction[0].UpdatedByUser.FirstName}} {{selectedTransaction[0].UpdatedByUser.LastName}}
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;Category:
+                    <br />
+                    &nbsp;&nbsp;<select required ng-model="selectedCategory" ng-options="category.Name for category in categories track by category.Id" class=" = " form-control></select>
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;Description:
+                    <br />
+                    &nbsp;&nbsp;<input type="text" ng-model="description" />
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;Amount:
+                    <br />
+                    &nbsp;&nbsp;(Please enter a negative amount for a debit.)
+                    <br />
+                    $<input type="number" value="{{Amount | number: 2}}" ng-model="newAmount" />
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;Reconciled Amount:
+                    <br />
+                    &nbsp;&nbsp;(Please enter a negative amount for a debit.)
+                    <br />
+                    $<input type="number" value="{{ReconciledAmount | number: 2}}" ng-model="newRecAmount" />
+                    <br />
+                    <br />
+                    &nbsp;&nbsp;<input type="button" value="Submit" ng-click="editTransaction()" />
+                    <input type="button" value="Cancel" ng-click="getTransactions()" />
+                </form>
+            </div>
+
+            <div id="transTable">
+                <h2 class="sectionHeading">Transactions for the "{{household}}" Household</h2>
+                <br />
+                <table tr-ng-grid="" items="transactions" selected-items="selectedTransaction" class="transactionTable" selection-mode="SingleRow" page-items="4">
+                    <thead>
+                        <tr>
+                            <th field-name="Date" class="transDate"></th>
+                            <!--<th field-name="DisplayDate" display-name="Date"></th>
+                            <th field-name="DisplayTime" display-name="Time" enable-filtering="false"></th>-->
+                            <th field-name="FinAccount.Name" display-name="Account"></th>
+                            <th field-name="Category.Name" display-name="Category" enable-filtering="false"></th>
+                            <th field-name="Description" class="transDesc" enable-filtering="false"></th>
+                            <th field-name="Amount" display-name="Amount ($)" enable-filtering="false"></th>
+                            <th field-name="ReconciledAmount" display-name="Reconciled Amount ($)" enable-filtering="false" class="reconciledAmount"></th>
+                            <!--<th field-name="DisplayUpdated" display-name="Updated" enable-filtering="false"></th>-->
+                            <th field-name="Updated" class="transUpdated" enable-filtering="false"></th>
+                            <th field-name="UpdatedByUser.FirstName" display-name="Updated By" enable-filtering="false"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td field-name="Date" class="Date">
+                                <div>
+                                    {{gridDisplayItem.Date | date: "MMM. d, yyyy, h:mma"}}
+                                </div>
+                            </td>
+                            <td field-name="Amount">
+                                <div>
+                                    {{gridDisplayItem.Amount | currency: ""}}
+                                </div>
+                            </td>
+                            <td field-name="ReconciledAmount" class="ReconciledAmount">
+                                <div>
+                                    {{gridDisplayItem.ReconciledAmount | currency: ""}}
+                                </div>
+                            </td>
+                            <td field-name="Updated">
+                                <div>
+                                    {{gridDisplayItem.Updated | date: "MMM. d, yyyy, h:mma"}}
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <br />
+            <span id="modButtons">
+                <button ng-click="dispEditForm()">Edit Transaction</button> <button ng-click="deleteTransaction()">Delete Transaction</button>
+            </span>
+        </div>
+    </div>
+</div>

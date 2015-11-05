@@ -1,0 +1,42 @@
+﻿<div class="wrapper">
+    <h1>Household</h1>
+    <br />
+    <div class="container">
+        <div ng-controller="HouseholdController">
+            <h2 class="sectionHeading">Members of the "{{household}}" Household</h2>
+            <br />
+            <table tr-ng-grid="" items="houseMembers" id="householdTable">
+                <thead>
+                    <tr>
+                        <th field-name="FirstName" display-name="First Name" enable-filtering="false"></th>
+                        <th field-name="LastName" display-name="Last Name" enable-filtering="false"></th>
+                        <th field-name="Email" display-name="E-mail Address" enable-filtering="false"></th>
+                    </tr>
+                </thead>
+            </table>
+            <br />
+            <br />
+            <button ng-click="showFrame()" id="inviteButton">Invite New Member</button>
+
+
+            <div id="inviteFrame">
+                <h2>Invite a New User to Join the Household</h2>
+                <form>
+                    New User's Name:
+                    <br />
+                    <input ng-model="toUserName" type="text" />
+                    <br />
+                    <br />
+                    New User's E-mail Address:
+                    <br />
+                    <input ng-model="toEmail" type="text" />
+                    <br />
+                    <br />
+                    <input type="button" value="Submit" ng-click="inviteUser()" />
+                    <input type="button" value="Cancel" ng-click="hideFrame()" />
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
