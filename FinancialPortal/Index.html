@@ -35,61 +35,27 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
 <body>
     <div ng-app="FinancialPortal">
         <div id="wrapper" ng-controller="menuCtrl">
             <!-- Navigation -->
             <div class="container">
                 <nav class="navbar navbar-inverse navbar-fixed-top">
-
-                    <!--<h3 class="appTitle navbar-brand"><i>Budget Master</i></h3>-->
-
-
-
                     <div class="container">
                         <div class="navbar-collapse navbar-right collapse">
-
+                            <a href="https://hhussain.azurewebsites.net/Home/Index/#header" target="_blank">
+                                <img src="Images/avatar0.png" class="img-circle logo" width="30" height="30">
+                            </a>
                             <ul class="nav navbar-nav navbar-right">
                                 <li dropdown ng-if="authentication.isAuth" class="dropdown profile">
                                     <a href="" class="dropdown-toggle" data-toggle="dropdown">
                                         <span class="meta">
-                                            <span class="appTitle"><i>Budget Master</i>&nbsp; &nbsp;</span>
-                                            <span class="avatar" ng-if="authentication.username === 'hhussain1629@gmail.com'">
-                                                <span class="avatar">
-                                                    <img src="Images/avatar1_me.png" class="img-circle" width="30" height="30">
-                                                </span>
-                                            </span>
-                                            <span class="avatar" ng-if="authentication.username !== 'hhussain1629@gmail.com'">
-                                                <span class="avatar">
-                                                    <img src="Images/avatar0.png" class="img-circle" width="30" height="30">
-                                                </span>
-                                            </span>
                                             <span class="dropdown-toggle text" dropdown-toggle>{{authentication.firstName}} {{authentication.lastName}}</span>
                                             <span class="caret"></span>
                                         </span>
                                     </a>
                                     <ul class="dropdown-menu animated flipInX" role="menu">
-                                        <!--<li>
-                                                    <a href="">
-                                                        <span class="icon">
-                                                            <i class="fa fa-user"></i>
-                                                        </span>My Account
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0);">
-                                                        <span class="icon">
-                                                            <i class="fa fa-envelope"></i>
-                                                        </span>Messages
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0);">
-                                                        <span class="icon">
-                                                            <i class="fa fa-cog"></i>
-                                                        </span>Settings
-                                                    </a>
-                                        </li>-->
                                         <li class="divider"></li>
                                         <li>
                                             <a ui-sref="account">
@@ -109,7 +75,6 @@
                                     <a href="" class="dropdown-toggle" data-toggle="dropdown">
                                         <span class="meta">
                                             <span class="icon">
-                                                <!--<img src="Images/avatar0.png" class="img-circle" width="30" height="30">-->
                                                 <i class="fa fa-bookmark"></i>
                                             </span>
                                             <span class="text">Login/Register</span>
@@ -117,11 +82,6 @@
                                         </span>
                                     </a>
                                     <ul class="dropdown-menu animated flipInX" role="menu">
-                                        <!--<li class="divider"></li>
-                                        <li>
-                                            <a ui-sref="home">Home</a>
-                                        </li>
-                                        <li class="divider"></li>-->
                                         <li>
                                             <a ui-sref="login">
                                                 <span class="icon">
@@ -141,24 +101,10 @@
                                 </li>
                             </ul>
                         </div>
-                        <!--<div class="navbar-header"> </div>-->
-                        <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>-->
-
-
                     </div>
                     <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens-->
                     <div ng-if="authentication.isAuth" class="collapse navbar-collapse navbar-ex1-collapse" id="leftMenu">
                         <ul class="nav navbar-nav side-nav">
-                            <!--<li>
-                                <a ui-sref="login"><i class="fa fa-fw fa-table"></i>Log in</a>
-                            </li>-->
-                            <!--<li class="appTitle">
-
-                            </li>-->
                             <li>
                                 <a ui-sref="dashboard"><i class="fa fa-fw fa-dashboard"></i>Dashboard</a>
                             </li>
@@ -176,18 +122,18 @@
                             </li>
                         </ul>
                     </div>
-                    <!-- /.navbar-collapse
-                    </nav>-->
+
 
                 </nav>
-                <!--<div ng-if="!authentication.isAuth" ui-view></div>-->
+
             </div>
 
 
 
             <div id="page-wrapper">
                 <div class="container-fluid">
-                    <div ui-view class="stateView"></div>
+                    <div ui-view class="stateView">
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
             </div>
@@ -237,8 +183,6 @@
     <script src="NgApps/Controllers/BudgetItemController.js"></script>
     <script src="NgApps/Controllers/HouseholdController.js"></script>
     <script src="NgApps/Controllers/DashboardController.js"></script>
-
-    <!--<script src="js/html5-canvas-bar-graph.js"></script>-->
 
 </body>
 </html>

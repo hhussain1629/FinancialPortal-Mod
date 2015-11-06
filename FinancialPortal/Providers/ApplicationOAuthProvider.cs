@@ -36,7 +36,7 @@ namespace FinancialPortal.Providers
 
             if (user == null)
             {
-                context.SetError("invalid_grant", "The user name or password is incorrect.");
+                context.SetError("invalid_grant", "The e-mail address or password is incorrect.");
                 return;
             }
 
