@@ -26,15 +26,15 @@ namespace FinancialPortal.Models
             return userIdentity;
         }
 
-        
+
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
         //public ApplicationDbContext()
-        //  : base("BudgetMaster1", throwIfV1Schema: false)
+        //  : base("DefaultConnection", throwIfV1Schema: false)
+        public ApplicationDbContext()
+          : base("BudgetMaster1", throwIfV1Schema: false)
         {
         }
 

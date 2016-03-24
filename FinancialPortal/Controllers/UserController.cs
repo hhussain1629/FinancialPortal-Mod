@@ -40,8 +40,8 @@ namespace FinancialPortal.Controllers
         {
             var fromUserName = db.Users.Find(fromUserId).FirstName + " " + db.Users.Find(fromUserId).LastName;
             var Household = db.Users.Find(fromUserId).Household;
-            string url = "http://localhost:59490/"; //Address of the local host; modify as needed.
-            //string url = "http://budgetmaster1.azurewebsites.net/"; //Set to URL of online application.
+            //string url = "http://localhost:59490/"; //Address of the local host; modify as needed.
+            string url = "http://budgetmaster1.azurewebsites.net/"; //Set to URL of online application.
             var body = toUserName + " ,\r\r\r" + fromUserName + " has invited you to join the '" +
                     Household + "' Household in Budget Master! Your invitation code is: " + inviteCode +
                     ". Please go to " + url + ", choose 'Register' in the menu, and enter your information, " +

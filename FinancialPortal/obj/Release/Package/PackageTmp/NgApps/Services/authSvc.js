@@ -37,6 +37,13 @@ app.factory('authSvc', ['$http', '$q', 'localStorageService', 'ngAuthSettings', 
 
     };
 
+    var _changePassword = function (passwordchange) {
+
+        return $http.post(serviceBase + 'api/account/changepassword', passwordchange).then(function (response) {
+            return response;
+        });
+
+    }
 
     var _login = function (loginData) {
 
@@ -118,6 +125,7 @@ app.factory('authSvc', ['$http', '$q', 'localStorageService', 'ngAuthSettings', 
     authServiceFactory.register = _saveRegistration;
     authServiceFactory.login = _login;
     authServiceFactory.logout = _logout;
+    authServiceFactory.changePassword = _changePassword;
     authServiceFactory.fillAuthData = _fillAuthData;
     authServiceFactory.authentication = _authentication;
     authServiceFactory.refresh = _refreshToken;

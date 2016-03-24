@@ -4,8 +4,11 @@
     </div>
     <div class="templateDisplay">
         <!-- Page Heading -->
+        
         <div class="row">
             <div class="col-lg-12">
+                <br />
+                <i class="appTitle">Budget Master</i>
                 <h1 class="page-header">
                     Dashboard <small>Statistics Overview for the "{{household}}" Household</small>
                 </h1>
@@ -23,12 +26,14 @@
         <div id="barGraphFrame" ng-if="maxValue > 0">
             <h3 class="graphTitle">Budget vs. Spending for {{monthname}} {{year}}</h3>
             <br />
-            
+            <br />
             <div class="row">
                 <div class="col-md-4">
                 </div>
                 <div class="col-md-1">
                     <br /><br /><br /><br />
+                    <b>BUDGET:</b>
+                    <br />
                     <span><b>{{monthlyincome | currency: "$"}}</b></span>
                 </div>
                 <!--<div class="col-md-1">
@@ -44,12 +49,14 @@
                     <li class="bar5 orangebar" style="height: 160px;">80</li>-->
                     </ul>
 
-                    <ul class="label"><li style="float:left;">Budget</li><li>Spending</li><li></li><li></li><li></li></ul>
+                    <!--<ul class="label"><li style="float:left;">Budget</li><li>Spending</li><li></li><li></li><li></li></ul>-->
                     <!--<ul class="y-axis"><li>100</li><li>75</li><li>50</li><li>25</li><li></li></ul>-->
                     <!--<p class="centered">Yearly US Fruit Consumption in Tons</p>-->
                 </div>
                 <div class="col-md-1">
                     <br /><br /><br /><br />
+                    <b>SPENDING:</b>
+                    <br />
                     <b>{{monthlyexpenses | currency: "$"}}</b>
                 </div>
                

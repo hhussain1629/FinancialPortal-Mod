@@ -52,8 +52,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       });
 }]);
 
-var serviceBase = 'http://localhost:59490/';
-//var serviceBase = 'http://budgetmaster1.azurewebsites.net/';
+//var serviceBase = 'http://localhost:59490/';
+var serviceBase = 'http://budgetmaster1.azurewebsites.net/';
 
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase
