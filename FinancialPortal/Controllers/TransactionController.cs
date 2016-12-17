@@ -175,11 +175,12 @@ namespace FinancialPortal.Controllers
         }
         
         [Authorize]
-        public decimal GetMonthlyExpenses(string household, int month)
+        public decimal GetMonthlyExpenses(string household, int month, int year)
         {
-            var temp = db.Database.SqlQuery<decimal>("EXEC GetMonthlyIncomesExpenses @household, @month, @isExpense",
+            var temp = db.Database.SqlQuery<decimal>("EXEC GetMonthlyIncomesExpenses @household, @month, @year, @isExpense",
                     new SqlParameter("household", household),
                     new SqlParameter("month", month),
+                    new SqlParameter("year", year),
                     new SqlParameter("isExpense", 1)).ToList();
             decimal expense = 0;
             foreach (var item in temp)

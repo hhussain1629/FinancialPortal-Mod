@@ -54,8 +54,8 @@
         return $http.get('/api/Transaction/', options).then(function (response) { return response.data; });
     }
 
-    factory.getmonthlyexpenses = function (household, month) {
-        var options = { params: { household: household, month: month + 1 } };
+    factory.getmonthlyexpenses = function (household, month, year) {
+        var options = { params: { household: household, month: month + 1, year: year } };
         return $http.get('/api/Transaction/', options).then(function (response) { return response.data; });
     }
 

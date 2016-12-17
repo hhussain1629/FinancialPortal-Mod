@@ -7,7 +7,4 @@
   <parameter name="BudgetMaster1-Web.config Connection String" description="" value="Data Source=coderfoundry.cloudapp.net,55555;Initial Catalog=hhussain-budget;Integrated Security=False;User ID=hhussain;Password=hussain@123!;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True" tags="">
     <parameterEntry kind="XmlFile" scope="C:\\Users\\Hammad\\Documents\\Visual\ Studio\ 2013\\Projects\\FinancialPortal-Mod\\FinancialPortal\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='BudgetMaster1']/@connectionString" />
   </parameter>
-  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." value="DefaultConnection_ConnectionString" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Users\\Hammad\\Documents\\Visual\ Studio\ 2013\\Projects\\FinancialPortal-Mod\\FinancialPortal\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
-  </parameter>
 </parameters>

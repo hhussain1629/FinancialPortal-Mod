@@ -33,7 +33,7 @@
             $scope.latesttrans = data;
         });
         FPortalSvc.getfinaccounts($scope.household).then(function (data) { $scope.finAccounts = data });
-        FPortalSvc.getmonthlyexpenses($scope.household, $scope.month)
+        FPortalSvc.getmonthlyexpenses($scope.household, $scope.month, $scope.year)
             .then(function (data) {
                 $scope.monthlyexpenses = Math.abs(data);
                 FPortalSvc.getincomeitems($scope.household)
